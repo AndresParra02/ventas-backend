@@ -51,12 +51,13 @@ app.post('/login', async (req, res) => {
 // -------------------
 // CONSULTAR VENTAS
 // -------------------
-app.get('/ventas/:cedula', async (req, res) => {
+app.get('/ventas_movil/:cedula_asesor', async (req, res) => {
   try {
-    const { cedula } = req.params;
+    const { cedula_asesor } = req.params;
 
     const result = await pool.query(
       `SELECT 
+        cedula_asesor,
         nombre_asesor,
         rut,
         nombre_cliente,
@@ -67,7 +68,7 @@ app.get('/ventas/:cedula', async (req, res) => {
         tipo_venta
        FROM ventas_movil
        WHERE cedula_asesor = $1`,
-      [cedula]
+      [cedula_asesor]
     );
 
     res.json(result.rows);
