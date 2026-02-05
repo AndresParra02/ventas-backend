@@ -57,14 +57,14 @@ app.get('/ventas/:cedula', async (req, res) => {
 
     const result = await pool.query(
       `SELECT 
-        NOMBRE_ASESOR,
-        RUT,
-        NOMBRE_CLIENTE,
-        ESTADO_VENTA,
-        FECHA_VENTA,
-        FECHA_ACTIVACION,
-        TEL_CONTACTO,
-        TIPO_VENTA
+        nombre_asesor,
+        rut,
+        nombre_cliente,
+        estado_venta,
+        fecha_venta,
+        fecha_activacion,
+        tel_contacto,
+        tipo_venta
        FROM ventas_movil
        WHERE cedula_asesor = $1`,
       [cedula]
@@ -73,7 +73,7 @@ app.get('/ventas/:cedula', async (req, res) => {
     res.json(result.rows);
 
   } catch (error) {
-    console.error(error);
+    console.error('Error consultando ventas:', error);
     res.status(500).json({ error: 'Error consultando ventas' });
   }
 });
