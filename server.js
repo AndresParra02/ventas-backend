@@ -56,7 +56,17 @@ app.get('/ventas/:cedula', async (req, res) => {
     const { cedula } = req.params;
 
     const result = await pool.query(
-      'SELECT cliente, producto, valor, fecha FROM ventas WHERE cedula_asesor=$1',
+      `SELECT 
+        NOMBRE_ASESOR,
+        RUT,
+        NOMBRE_CLIENTE,
+        ESTADO_VENTA,
+        FECHA_VENTA,
+        FECHA_ACTIVACION,
+        TEL_CONTACTO,
+        TIPO_VENTA
+       FROM ventas_movil
+       WHERE cedula_asesor = $1`,
       [cedula]
     );
 
